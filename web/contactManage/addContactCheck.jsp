@@ -1,4 +1,4 @@
-<%--
+<%@ page import="java.sql.Connection" %><%--
   Created by IntelliJ IDEA.
   User: 86158
   Date: 2024/5/11
@@ -12,17 +12,17 @@
 </head>
 <body>
      <%
-         String clientNamenew=String(request.getparameter("clientName").getBytes("IS0-8859-1")，"UTE-8");
-         String contactNamenew=String(request.getParameter("contactName").getBytes("Is0-8859-1"),"UTE-8");
-         String contactContents= new String(request.getParameter("contactContents").getBytes("IS0-8859-1"),"UTF-8");
-         String contactstart= new string(request.getParameter("contactstart").getBytes("IS0-8859-1"),"UTE-8");
-         String contactEnd= new String(request.getParameter("contactEnd").getBytes("IS0-8859-1"),"UTE-8");
-         String StaffName= new string(request.getParameter("staffName").getBytes("IS0-8859-1"),"UTE-8");
+         String clientNamenew=String(request.getparameter("clientName").getBytes("ISo-8859-1"),"UTF-8");
+         String contactNamenew=String(request.getParameter("contactName").getBytes("Iso-8859-1"),"UTF-8");
+         String contactContents= new String(request.getParameter("contactContents").getBytes("ISo-8859-1"),"UTF-8");
+         String contactstart= new String(request.getParameter("contactstart").getBytes("ISo-8859-1"),"UTF-8");
+         String contactEnd= new String(request.getParameter("contactEnd").getBytes("ISO-8859-1"),"UTF-8");
+         String StaffName= new String(request.getParameter("staffName").getBytes("ISO-8859-1"),"UTF-8");
          Connection con=null;
          Statement st=null;
          try {
              Class.forName("com.mysql.jdbc.Driver");
-             string url = "jdbc:mysql://localhost:3306/eims ?useUnicode=true&characterEncoding=qbk";
+             String url = "jdbc:mysql://localhost:3306/eims ?useUnicode=true&characterEncoding=qbk";
              con = DriverManager.getConnection(url, "root", "admin");
              st = con.createstatement();
              String sql = "insert into contact(clientName,contactName,contactContents,contactstart, contactEnd,StaffName)values ('" + clientName + "','" + contactName + "','" + contactContents + "", "+contactStart+"','"+contactEnd+"','"+ StaffName+"')";

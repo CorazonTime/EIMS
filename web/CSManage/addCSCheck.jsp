@@ -12,14 +12,14 @@
 </head>
 <body>
      <%
-         String clientNamenew=String(request.getParameter("clientName").getBytes("IS0-8859-1"),"UTE-8");
-         String clientOpinion=new string(request.getParameter("clientOpinion").getBytes("IS0-8859-1"),"UTE-8");
-         string staffName= new string(request.getparameter("staffName").getBytes("ISo-8859-1")，"UTE-8");
+         String clientNamenew=String(request.getParameter("clientName").getBytes("ISO-8859-1"),"UTF-8");
+         String clientOpinion=new String(request.getParameter("clientOpinion").getBytes("ISO-8859-1"),"UTF-8");
+         String staffName= new String(request.getparameter("staffName").getBytes("ISo-8859-1"),"UTF-8");
          Connection con=null;
          Statement st=null;
          try {
              Class.forName("com.mysql.jdbc.Driver");
-             string url -"jdbc:mysql://localhost:3306/eims ?useUnicode=true&characterEncoding=gbk";
+             String url ="jdbc:mysql://localhost:3306/eims ?useUnicode=true&characterEncoding=gbk";
              con = DriverManager.getConnection(url, "root", "admin");
              st = con.createstatement();
              String sql = "insert into cs (clientName,clientOpinion,staffName) values('" + clientName + "", '"+clientOpinion+"",' "+StaffName+" ')";
