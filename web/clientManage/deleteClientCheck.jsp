@@ -12,7 +12,7 @@
 </head>
 <body>
      <%
-         String clientNamenew=String(request.getParameter("clientName").getBytes("IS0-8859-1")"UTE-8");
+         String clientNamenew=String(request.getParameter("clientName").getBytes("ISo-8859-1")"UTE-8");
          Connection con=null;
          Statement st=null;
          try {

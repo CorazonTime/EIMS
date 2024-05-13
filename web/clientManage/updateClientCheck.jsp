@@ -1,4 +1,5 @@
-<%--
+<%@ page import="java.sql.Connection" %>
+<%@ page import="java.sql.Statement" %><%--
   Created by IntelliJ IDEA.
   User: 86158
   Date: 2024/5/11
@@ -12,10 +13,10 @@
 </head>
 <body>
     <%
-  String clientName= new String(request.getParameter("clientName").getBytes("IS0-8859-1"),"UT-8");
-  string clientTelephone= new String(request.getParameter("clientTelephone").getBytes("IS0-8859-1"),"UTF-8");
-  String clientAddress= new String(request.getParameter("clientAddress").getBytes("IS0-8859-1")，"UTE-8");
-  String clientEmail=new String(request.getParameter("clientEmail").getBytes("Is0-8859-1"),"UTE-8");
+  String clientName= new String(request.getParameter("clientName").getBytes("ISo-8859-1"),"UTF-8");
+  String clientTelephone= new String(request.getParameter("clientTelephone").getBytes("ISo-8859-1"),"UTF-8");
+  String clientAddress= new String(request.getParameter("clientAddress").getBytes("ISo-8859-1"),"UTF-8");
+  String clientEmail=new String(request.getParameter("clientEmail").getBytes("Iso-8859-1"),"UTF-8");
   Connection con=null;
   Statement st=null;
   if(clientName.equals("")){
@@ -24,7 +25,7 @@
   else {
       try {
           Class.forName("com.mysql.jdbc.Driver");
-          string url = "jdbc:mysql://localhost:3306/EIMS"?useUnicode = true & characterEncoding = gbk";
+          String url = "jdbc:mysql://localhost:3306/EIMS"?useUnicode = true & characterEncoding = gbk";
           con = DriverManager.getConnection(url, "root", "admin");
           st = con.createstatement();
           String sql = "update client set clientName = '" + clientName +"'，clientTelephone = '"+ clientTelephone + "',clientAddress='" + clientAddress + "', clientEmail = '"+ clientEmail +"' where clientName = '"+ clientName + "'";

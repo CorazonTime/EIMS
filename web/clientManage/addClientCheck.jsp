@@ -12,15 +12,15 @@
 </head>
 <body>
    <%
-  string clientName=new String(request.getparameter("clientName").getBytes("Is0-8859-1"),"UTE-8");
-  String clientTelephone=new String(request.getParameter("clientTelephone").getBytes("IS0-8859-1"),"UTE-8");
+  String clientName=new String(request.getparameter("clientName").getBytes("Is0-8859-1"),"UTE-8");
+  String clientTelephone=new String(request.getParameter("clientTelephone").getBytes("ISo-8859-1"),"UTF-8");
   String clientAddress= new String(request.getparameter("clientAddress").getBytes("IS0-8859-1"),"UTE-8");
-  String clientEmail= new string(request.getParameter("clientEmail").getBytes("IS0-8859-1")，"UTE-8");
+  String clientEmail= new String(request.getParameter("clientEmail").getBytes("ISo-8859-1"),"UTF-8");
   Connection con=null;
   Statement st=null;
   try{
   Class.forName("com.mysql.jdbc.Driver");
-  string url="jdbc:mysql://localhost:3306/eims?useUnicode=true&characterEncoding=gbk";
+  String url="jdbc:mysql://localhost:3306/eims?useUnicode=true&characterEncoding=gbk";
   con=DriverManager.getConnection(url,"root","admin");
   st=con.createstatement();
   String sql="insert into client(clientName,clientlelephone ,clientAddress,clientEmail)values('"+clientName+"',""+clientTelephone+"','"+clientAddress+"','"+ clientEmail+"')";
