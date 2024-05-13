@@ -1,4 +1,6 @@
-<%@ page import="java.sql.Connection" %><%--
+<%@ page import="java.sql.Connection" %>
+<%@ page import="java.sql.Statement" %>
+<%@ page import="java.sql.DriverManager" %><%--
   Created by IntelliJ IDEA.
   User: 86158
   Date: 2024/5/11
@@ -12,8 +14,8 @@
 </head>
 <body>
      <%
-         String clientNamenew=String(request.getparameter("clientName").getBytes("ISo-8859-1"),"UTF-8");
-         String contactNamenew=String(request.getParameter("contactName").getBytes("Iso-8859-1"),"UTF-8");
+         String clientNamenew= new String(request.getParameter("clientName").getBytes("ISo-8859-1"),"UTF-8");
+         String contactNamenew= new String(request.getParameter("contactName").getBytes("Iso-8859-1"),"UTF-8");
          String contactContents= new String(request.getParameter("contactContents").getBytes("ISo-8859-1"),"UTF-8");
          String contactstart= new String(request.getParameter("contactstart").getBytes("ISo-8859-1"),"UTF-8");
          String contactEnd= new String(request.getParameter("contactEnd").getBytes("ISO-8859-1"),"UTF-8");
@@ -24,13 +26,15 @@
              Class.forName("com.mysql.jdbc.Driver");
              String url = "jdbc:mysql://localhost:3306/eims ?useUnicode=true&characterEncoding=qbk";
              con = DriverManager.getConnection(url, "root", "admin");
-             st = con.createstatement();
-             String sql = "insert into contact(clientName,contactName,contactContents,contactstart, contactEnd,StaffName)values ('" + clientName + "','" + contactName + "','" + contactContents + "", "+contactStart+"','"+contactEnd+"','"+ StaffName+"')";
+             st = con.createStatement();
+             String clientName;
+             String contactName;
+             String sql = "insert into contact(clientName,contactName,contactContents,contactstart, contactEnd,StaffName)values ('" + clientName + "','" + contactName + "'," + contactContents + "", "+contactStart+"','"+contactEnd+"','"+ StaffName+"')";
              st.executeUpdate(sql);
              response.sendRedirect("http://localhost:8084/EIMS/ contactManage/lookContact.jsp");
          }
     catch(Exception e) {
-        e.printstackTrace();
+        e.printStackTrace();
     }
     finally {
              st.close();

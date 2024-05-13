@@ -1,5 +1,6 @@
 <%@ page import="java.sql.Connection" %>
-<%@ page import="java.sql.Statement" %><%--
+<%@ page import="java.sql.Statement" %>
+<%@ page import="java.sql.DriverManager" %><%--
   Created by IntelliJ IDEA.
   User: 86158
   Date: 2024/5/11
@@ -20,19 +21,19 @@
   Connection con=null;
   Statement st=null;
   if(clientName.equals("")){
-  response,sendRedirect("http://localhost:8084/EIMs/clientManage/updateclient.jsp");
+  response.sendRedirect("http://localhost:8084/EIMs/clientManage/updateclient.jsp");
   }
   else {
       try {
           Class.forName("com.mysql.jdbc.Driver");
           String url = "jdbc:mysql://localhost:3306/EIMS"?useUnicode = true & characterEncoding = gbk";
           con = DriverManager.getConnection(url, "root", "admin");
-          st = con.createstatement();
-          String sql = "update client set clientName = '" + clientName +"'，clientTelephone = '"+ clientTelephone + "',clientAddress='" + clientAddress + "', clientEmail = '"+ clientEmail +"' where clientName = '"+ clientName + "'";
+          st = con.createStatement();
+          String sql = "update client set clientName = '" + clientName +"',clientTelephone = '"+ clientTelephone + "',clientAddress='" + clientAddress + "', clientEmail = '"+ clientEmail +"' where clientName = '"+ clientName + "'";
           st.executeUpdate(sql);
           response.sendRedirect("http://localhost:8084/EIMS/clientManage/lookClient.jsp");
       } catch (Exception e) {
-          e.printstackTrace();
+          e.printStackTrace();
       } finally {
           st.close();
           con.close();
