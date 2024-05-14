@@ -11,18 +11,18 @@
     <title>修改客户信息</title>
 </head>
 <body bgcolor="lightgreen">
-  <form action="http://localhost:8084/EIMs/clientManage/updateClientCheck.jsp" method="post">
+  <form action="updateClientCheck.jsp" method="post">
       <table align="center" width="500" >
     <tr>
         <td>
-            <a href="http://localhost:8084/EIMs/clientManage/ClientManage.jsp">客户查询</a>
+            <a href="ClientManage.jsp">客户查询</a>
         </td>
         <td>
-            <a href="http://localhost:8084/EIMS/clientManage/addClient.jsp">客户添加</a>
+            <a href="addClient.jsp">客户添加</a>
         </td>
         <td>客户修改</td>
         <td>
-            <a href="http://localhost:8084/EIMs/clientManage/deleteClient.jsp">客户删除</a>
+            <a href="deleteClient.jsp">客户删除</a>
         </td>
     </tr>
       </table>
@@ -46,14 +46,14 @@
               <td><input type="text" name="clientAddress"/></td>
           </tr>
           <tr>
-          <td>邮箱</td>
-          <td><input type="text" name="clientEmail"/></td>
-      </tr>
+              <td>邮箱</td>
+              <td><input type="text" name="clientEmail"/></td>
+          </tr>
           <tr align="center">
               <td colspan="2">
-              <input name="sure" type="submit" value="确认">
-              &nbsp; &nbsp; &nbsp; &nbsp;
-              <input name="clear" type="reset" value="取消">
+                  <input name="sure" type="submit" value="确认">
+                  &nbsp; &nbsp; &nbsp; &nbsp;
+                  <input name="clear" type="reset" value="取消">
               </td>
           </tr>
       </table>

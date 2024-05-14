@@ -1,4 +1,7 @@
-<%--
+<%@ page import="java.sql.Connection" %>
+<%@ page import="java.sql.Statement" %>
+<%@ page import="java.sql.DriverManager" %>
+<%@ page import="SQL.DBConnectionManager" %><%--
   Created by IntelliJ IDEA.
   User: 86158
   Date: 2024/5/13
@@ -12,24 +15,19 @@
 </head>
 <body>
      <%
-         String clientNamenew= new String(request.getParameter("clientName").getBytes("ISO-8859-1"),"UTF-8");
-         Connection con=null;
-         Statement st=null;
+         String clientName = request.getParameter("clientName");
+         Connection conn =null;
+         Statement stmt = null;
          try {
-             Class.forName("com.mysql.idbc.Driver");
-             String url = "jdbc:mysql://localhost:3306/eims?useUnicode=true&characterEncoding=gbk";
-             con = DriverManager.getConnection(url, "root", "admin");
-             st = con.createstatement();
-             String sql = "delete from client where clientName='" + clientName + "'";
-             st.executeUpdate(sql);
-             response.sendRedirect("http://localhost:8084/EIMS/clientManage/lookClient.jsp");
-         }
-             catch(Exception e){
-               e.printstackTrace();
-             }
-finally {
-             st.close();
-             con.close();
+             conn = DBConnectionManager.getConnection();
+             stmt = conn.createStatement();
+             String sql = "delete from client where clientName='" + clientName + "' ";
+             stmt.executeUpdate(sql);
+             response.sendRedirect("lookClient.jsp");
+         }catch(Exception e){
+             e.printStackTrace();
+         }finally {
+             DBConnectionManager.closeConnection();
          }
      %>
 </body>

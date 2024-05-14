@@ -1,6 +1,8 @@
 <%@ page import="java.sql.Connection" %>
 <%@ page import="java.sql.Statement" %>
-<%@ page import="java.sql.ResultSet" %><%--
+<%@ page import="java.sql.ResultSet" %>
+<%@ page import="SQL.DBConnectionManager" %>
+<%@ page import="java.sql.SQLException" %><%--
   Created by IntelliJ IDEA.
   User: 86158
   Date: 2024/5/11
@@ -17,13 +19,13 @@
     <tr>
         <td>客户查询</td>
         <td>
-            <a href="../clientManage/addClient.jsp">客户添加</a>
+            <a href="addClient.jsp">客户添加</a>
         </td>
         <td>
-            <a href="../clientManage/updateClient.jsp">客户修改</a>
+            <a href="updateClient.jsp">客户修改</a>
         </td>
         <td>
-            <a href="../clientManage/deleteclient.jsp">客户删除</a>
+            <a href="deleteClient.jsp">客户删除</a>
         </td>
     </tr>
 </table>
@@ -41,25 +43,32 @@
         <td>邮箱</td>
     </tr>
     <%
-            Connection con=null;
+            Connection conn=null;
             Statement stmt=null;
             ResultSet rs=null;
-            Class.forName("com.mysql.jdbc.Driver");
-    String url="jdbc:mysql://localhost:3306/eims ?useUnicode=true&characterEncoding=gbk";
-    con=DriverManager.getConnection(url,"root","admin");
-    stmt=con.createstatement();
-    String sql="select* from client";
-    rs=stmt.executeQuery(sql);
-    while(rs.next()){
+        try {
+            conn = DBConnectionManager.getConnection();
+            String sql = "SELECT * FROM client";
+            stmt = conn.prepareStatement(sql);
+            rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
     %>
     <tr>
-        <td><%=rs.getstring("clientName")%></td>
-        <td><%=rs.getstring("clientTelephone")%></td>
-        <td><%=rs.getstring("clientAddress")%></td>
-        <td><%=rs.getstring("clientEmail")%></td>
-        </tr>
+        <td><%=rs.getString("clientName")%></td>
+        <td><%=rs.getString("clientTelephone")%></td>
+        <td><%=rs.getString("clientAddress")%></td>
+        <td><%=rs.getString("clientEmail")%></td>
+    </tr>
         <%
             }
+        }catch (SQLException e) {
+                out.println("获取数据时发生错误: " + e.getMessage());
+                // 还可以将错误记录到日志文件或控制台
+                e.printStackTrace();
+        } finally {
+                DBConnectionManager.closeConnection();
+        }
         %>
         </table>
 </body>

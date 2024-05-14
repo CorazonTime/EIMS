@@ -11,18 +11,18 @@
     <title>添加客户信息</title>
 </head>
 <body bgcolor="lightgreen">
-  <form action="http://localhost:8084/EIMS/clientManage/addclientcheck.jsp" method="post">
+  <form action="addClientCheck.jsp" method="post">
      <table align="center"width="500" >
     <tr>
         <td>
-            <a href="http://localhost:8084/EIMS/clientManage/lookClient.jsp">客户查询</a>
+            <a href="lookClient.jsp">客户查询</a>
         </td>
         <td>客户添加</td>
         <td>
-            <a href="http://localhost:8084/EIMS/updateClient.jsp">客户修改</a>
+            <a href="updateClient.jsp">客户修改</a>
         </td>
         <td>
-        <a href="http://localhost:8084/EIMS/clientManage/deleteclient.jsp">客户删除</a>
+        <a href="deleteclient.jsp">客户删除</a>
         </td>
     </tr>
      </table>
@@ -38,10 +38,11 @@
             <td><input type="text" name="clientName"/></td>
         </tr>
         <tr>
-        <td>电话</td><td><input type="text" name="clientTelephone"/></td>
+            <td>电话</td>
+            <td><input type="text" name="clientTelephone"/></td>
         </tr>
         <tr>
-        <td>地址</td>
+            <td>地址</td>
             <td><input type="text" name="clientAddress"/></td>
         </tr>
         <tr>
@@ -50,9 +51,9 @@
         </tr>
         <tr align="center">
             <td colspan="2">
-                <input name="sure" type="submit"value="确认">
+                <input name="sure" type="submit" value="确认">
                 &nbsp; &nbsp; &nbsp; &nbsp;
-                <input name="clear" type="reset"value="取消">
+                <input name="clear" type="reset" value="取消">
             </td>
         </tr>
     </table>

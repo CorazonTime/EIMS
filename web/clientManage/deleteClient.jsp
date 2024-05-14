@@ -11,17 +11,17 @@
     <title>客户删除</title>
 </head>
 <body bgcolor="lightgreen">
-   <form action="../clientManage/deleteclientcheck.jsp" method="post">
+   <form action="deleteClientCheck.jsp" method="post">
    <table align="center" width="500" >
     <tr>
         <td>
-            <a href="../clientManage/lookclient.jsp">客户査询</a>
+            <a href="lookclient.jsp">客户査询</a>
         </td>
         <td>
-            <a href="../clientManage/clientManage.jsp">客户添加</a>
+            <a href="clientManage.jsp">客户添加</a>
         </td>
         <td>
-            <a href="../clientManage/updateclient.jsp">客户修改</a>
+            <a href="updateclient.jsp">客户修改</a>
         </td>
         <td>客户删除</td>
     </tr>
