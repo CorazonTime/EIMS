@@ -17,7 +17,7 @@
 <br><br><br><br><br><br>
 <br><br><br><br><br><br>
 <center>
-    <form action="" >
+    <form action="loginCheck.jsp"  >
         <table border="0">
             <tr>
                 <td>
@@ -27,21 +27,6 @@
                                 输入用户姓名<input type="text" name="userName" size="20">
                                 <br>
                                 输入用户密码<input type="password" name="password" size="20">
-                                <%
-                                    // 获取用户提交的密码
-                                    String password = request.getParameter("password");
-                                    // 对密码进行加密
-                                    String encryptedPassword = new String();
-
-                                    if (password != null) {
-                                        // 对密码进行加密
-                                        encryptedPassword = "123456";
-                                        // 将加密后的密码放入隐藏域，以便传递给后端处理验证
-                                    }
-                                %>
-                                <%= "Debug: 加密后的密码值是：" + encryptedPassword %>
-                                <input type="hidden" name="encryptedPassword" id="encryptedPassword" value="<%= encryptedPassword%>" />
-
                                 <br><br>
                                 <input type="submit" size="12" value="登录">
                                 &nbsp;&nbsp;&nbsp;&nbsp;

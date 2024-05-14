@@ -10,9 +10,9 @@
 <head>
     <title>企业信息管理系统一主页面</title>
 </head>
-<frameset rows="*"cols="120，*">
+<frameset cols="120,*">
     <frame src="left.jsp" name="left" scrolling="no" />
-     <frameset rows="l80,*"cols="*">
+     <frameset rows="80,*">
        <frame src="top.jsp" name="top" scrolling="no"/>
        <frame src="bottom.jsp" name="main" />
      </frameset>

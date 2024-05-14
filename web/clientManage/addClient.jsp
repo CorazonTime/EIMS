@@ -11,7 +11,7 @@
     <title>添加客户信息</title>
 </head>
 <body bgcolor="lightgreen">
-  <form action="http://localhost:8084/EIMs/clientManage/addclientcheck.jsp" method="post">
+  <form action="http://localhost:8084/EIMS/clientManage/addclientcheck.jsp" method="post">
      <table align="center"width="500" >
     <tr>
         <td>

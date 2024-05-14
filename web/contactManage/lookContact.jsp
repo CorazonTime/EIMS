@@ -1,3 +1,7 @@
+<%@ page import="java.sql.Connection" %>
+<%@ page import="java.sql.Statement" %>
+<%@ page import="com.mysql.cj.protocol.Resultset" %>
+<%@ page import="java.sql.DriverManager" %>
 <%--
   Created by IntelliJ IDEA.
   User: 86158
@@ -40,19 +44,19 @@
         Resultset rs=null;
         Class.forName("com.mysql.jdbc.Driver");
         String url="jdbc:mysql://localhost:3306/eims?useUnicode=true&characterEncoding=qbk";
-        con=DriverManager.getConnection(url,"root","admin");
-        stmt=con.createstatement();
+        con= DriverManager.getConnection(url,"root","admin");
+        stmt=con.createStatement();
         String sql="select * from contact";
         rs=stmt.executeQuery(sql);
         while(rs.next()){
     %>
     <tr>
-        <td><%=rs.getstring("clientName")%></td>
-        <td><%=rs.getstring("contactName")%></td>
-        <td><%=rs.getstring("contactContents")%></td>
-        <td><%=rs.getstring("contactstart")%></td>
-        <td><%=rs.getstring("contactEnd")%></td>
-        <td><%=rs.getstring("staffName")%></td>
+        <td><%=rs.getString("clientName")%></td>
+        <td><%=rs.getString("contactName")%></td>
+        <td><%=rs.getString("contactContents")%></td>
+        <td><%=rs.getString("contactstart")%></td>
+        <td><%=rs.getString("contactEnd")%></td>
+        <td><%=rs.getString("staffName")%></td>
         </tr>
     <%
         }

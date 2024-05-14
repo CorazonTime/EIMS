@@ -19,32 +19,32 @@
     </tr>
     <tr>
         <td>
-            <a href="http://localhost:8084/EIMS/clientManage/lookClient.jsp" target="main">客户管理</a>
+            <a href="../clientManage/lookClient.jsp" target="main">客户管理</a>
         </td>
     </tr>
     <tr>
         <td>
-            <a href="http://localhost:8084/EIMS/contactManage/lookContact.jsp" target="main">合同管理</a>
+            <a href="../contactManage/lookContact.jsp" target="main">合同管理</a>
         </td>
     </tr>
     <tr>
         <td>
-            <a href="http://localhost:8084/EIMS/CSManage/lookCS.jsp" target="main">管理售后</a>
+            <a href="../CSManage/lookCS.jsp" target="main">管理售后</a>
         </td>
     </tr>
     <tr>
         <td>
-            <a href="http://localhost:8084/EIMS/productManage/lookProduct.jsp" target="main">产品管理</a>
+            <a href="../productManage/lookProduct.jsp" target="main">产品管理</a>
         </td>
     </tr>
     <tr>
         <td>
-            <a href="ttp://localhost:8084/EIMS/staffManage/lookStaff.jsp" target="main">员工管理</a>
+            <a href="../staffManage/lookStaff.jsp" target="main">员工管理</a>
         </td>
     </tr>
     <tr>
         <td>
-            <a href="http://localhost:8084/EIMS/login.jsp" target="_parent">退出系统</a>
+            <a href="../login.jsp" target="_parent">退出系统</a>
         </td>
     </tr>
 </table>

@@ -1,5 +1,6 @@
 <%@ page import="SQL.DBConnectionManager" %>
-<%@ page import="java.sql.*" %><%--
+<%@ page import="java.sql.*" %>
+<%@ page import="SQL.passwrod" %><%--
   Created by IntelliJ IDEA.
   User: Corazon
   Date: 2024/5/14
@@ -14,7 +15,10 @@
 <body>
 <%
     String userName = request.getParameter("userName");
-    String encryptedPassword = request.getParameter("encryptedPassword");
+    String password = request.getParameter("password");
+
+    // 对密码进行加密
+    String encryptedPassword = passwrod.encrypt(password);
 
     if (userName == null || userName.isEmpty()) {
         response.sendRedirect("login.jsp");
@@ -42,9 +46,7 @@
                 response.sendRedirect("main/main.jsp");
             } else {
                 // 密码不匹配，重定向到登录页面
-                out.println("输入的用户名：" + userName +"输入的密码：" + encryptedPassword);
-                out.println("数据库用户名：" + rs.getString("userName") + ", 数据库密码：" + rs.getString("encryptedPassword"));
-//                response.sendRedirect("login.jsp");
+                response.sendRedirect("login.jsp");
             }
         } else {
             // 用户名不存在，重定向到登录页面

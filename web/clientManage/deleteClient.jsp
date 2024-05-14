@@ -11,17 +11,17 @@
     <title>客户删除</title>
 </head>
 <body bgcolor="lightgreen">
-   <form action="http://localhost:8084/EIMS/clientManage/deleteclientcheck.jsp" method="post">
+   <form action="../clientManage/deleteclientcheck.jsp" method="post">
    <table align="center" width="500" >
     <tr>
         <td>
-            <a href="http://localhost:8084/EIMS/clientManage/lookclient.jsp">客户査询</a>
+            <a href="../clientManage/lookclient.jsp">客户査询</a>
         </td>
         <td>
-            <a href="http://localhost:8084/EIMS/clientManage/clientManage.jsp">客户添加</a>
+            <a href="../clientManage/clientManage.jsp">客户添加</a>
         </td>
         <td>
-            <a href="http://localhost:8084/EIMs/clientManage/updateclient.jsp">客户修改</a>
+            <a href="../clientManage/updateclient.jsp">客户修改</a>
         </td>
         <td>客户删除</td>
     </tr>

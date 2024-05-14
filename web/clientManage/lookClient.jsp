@@ -17,13 +17,13 @@
     <tr>
         <td>客户查询</td>
         <td>
-            <a href="http://localhost:8084/EIMs/clientManage/addClient.jsp">客户添加</a>
+            <a href="../clientManage/addClient.jsp">客户添加</a>
         </td>
         <td>
-            <a href="http://localhost:8084/EIMs/clientManage/updateClient.jsp">客户修改</a>
+            <a href="../clientManage/updateClient.jsp">客户修改</a>
         </td>
         <td>
-            <a href="http://localhost:8084/EIMs/clientManage/deleteclient.jsp">客户删除</a>
+            <a href="../clientManage/deleteclient.jsp">客户删除</a>
         </td>
     </tr>
 </table>
@@ -45,8 +45,7 @@
             Statement stmt=null;
             ResultSet rs=null;
             Class.forName("com.mysql.jdbc.Driver");
-    String url="jdbc:mysql://localhost:3306/eims
-    ?useUnicode=true&characterEncoding=gbk";
+    String url="jdbc:mysql://localhost:3306/eims ?useUnicode=true&characterEncoding=gbk";
     con=DriverManager.getConnection(url,"root","admin");
     stmt=con.createstatement();
     String sql="select* from client";
