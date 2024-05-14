@@ -1,4 +1,8 @@
-<%--
+<%@ page import="SQL.DBConnectionManager" %>
+<%@ page import="java.sql.ResultSet" %>
+<%@ page import="java.sql.PreparedStatement" %>
+<%@ page import="java.sql.Connection" %>
+<%@ page import="java.sql.SQLException" %><%--
   Created by IntelliJ IDEA.
   User: 86158
   Date: 2024/5/11
@@ -11,17 +15,18 @@
     <title>查询员工</title>
 </head>
 <body bgcolor="lightgreen">
-<table align="center"width="500">
+<table align="center" width="500">
     <tr>
-        <td>员工查询</td><td>
-
-    </td>
+        <td>员工查询</td>
+        <td>
+            <a href="addStaff.jsp">员工添加</a>
+        </td>
     </tr>
 </table>
 <br>
 <hr>
 <br>
-<table align="center"width="700"border=2" >
+<table align="center" width="700" border=2">
     <tr>
         <th colspan="8">查看员工信息</th>
     </tr>
@@ -34,30 +39,38 @@
         <td>人职时间</td>
         <td>职务</td>
         <td>工资</td>
-</tr>
-      <%
-        Connection con=null;
-        Statement stmt=null;
-        ResultSet rs=null;
-        Class.forName("com.mysgl.jdbc.Driver");
-        String url="jdbc:mysql://localhost:3306/eims?useUnicode-true&characterEncoding-gbk";con=DriverManager.getConnection(url,"root","admin");
-        stmt=con.createstatement();
-        String sql="select * from staff";
-        rs=stmt.executeQuery(sql);while(rs.next()){
-      %>
-      <tr>
-          <td><%=rs.getstring("staffName")%></td>
-          <td><%=rs.getstring("staffsex")%></td>
-          <td><%=rs.getstring("staffAge")%></td>
-          <td><%=rs.getstring("staffEducation")%></td>
-          <td><%=rs.getstring("staffDepartment")%></td>
-          <td><%=rs.getstring("staffDate")%></td>
-          <td><%=rs.getstring("staffDuty")%></td>
-          <td><%=rs.getstring("staffwage")%></td>
-      </tr>
-      <%
-        }
-      %>
+    </tr>
+        <%
+            Connection conn = null;
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+            try {
+                conn = DBConnectionManager.getConnection();
+                String sql = "SELECT * FROM staff";
+                stmt = conn.prepareStatement(sql);
+                rs = stmt.executeQuery();
 
+                while (rs.next()) {
+        %>
+    <tr>
+        <td><%=rs.getString("staffName")%></td>
+        <td><%=rs.getString("staffSex")%></td>
+        <td><%=rs.getString("staffAge")%></td>
+        <td><%=rs.getString("staffEducation")%></td>
+        <td><%=rs.getString("staffDepartment")%></td>
+        <td><%=rs.getString("staffDate")%></td>
+        <td><%=rs.getString("staffDuty")%></td>
+        <td><%=rs.getInt("staffWage")%></td>
+    </tr>
+        <%
+                }
+            } catch (SQLException e) {
+                out.println("获取数据时发生错误: " + e.getMessage());
+                // 还可以将错误记录到日志文件或控制台
+                e.printStackTrace();
+            } finally {
+                DBConnectionManager.closeConnection();
+            }
+        %>
 </body>
 </html>

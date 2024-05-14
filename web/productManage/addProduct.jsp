@@ -10,16 +10,16 @@
 <head>
     <title>添加产品信息</title>
 </head>
-<body bgcolor ="lightgreen">
-<form action="http://localhost:8084/EIMS/productManage/addproductcheck.jsp" method="post">
-    <table align="center"width="500">
-    <tr>
-    <td>
-        <a href="http://localhost:8084/EIMs/productManage/lookProduct.jsp">产品査询</a>
-    </td>
-        <td>产品添加</td>
-    </tr>
-</table>
+<body bgcolor="lightgreen">
+<form action="addProductCheck.jsp" method="post">
+    <table align="center" width="500">
+        <tr>
+            <td>
+                <a href="lookProduct.jsp">产品査询</a>
+            </td>
+            <td>产品添加</td>
+        </tr>
+    </table>
     <br>
     <hr>
     <br>
@@ -45,7 +45,7 @@
         </tr>
         <tr align="center">
             <td colspan="2">
-                <input name="sure"type="submit"value="确认">
+                <input name="sure" type="submit" value="确认">
                 &nbsp; &nbsp; &nbsp; &nbsp;
                 <input name="clear" type="reset" value="取消">
             </td>

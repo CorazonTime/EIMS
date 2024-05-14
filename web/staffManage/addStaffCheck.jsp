@@ -1,4 +1,5 @@
-<%--
+<%@ page import="SQL.DBConnectionManager" %>
+<%@ page import="java.sql.*" %><%--
   Created by IntelliJ IDEA.
   User: 86158
   Date: 2024/5/11
@@ -12,31 +13,43 @@
 </head>
 <body>
       <%
-          String staffName=newString(request.getParameter("staffName").getBytes("ISo-8859-1"),"UTF-8");
-          String staffSex=newString(request.getParameter("staffsex").getBytes("Iso-8859-1"),"UTF-8");
-          String staffAge=new String(request.getParameter("staffAge").getBytes("ISo-8859-1"), "UTF-8");
-          String staffEducation=new String(request.getParameter("staffEducation").getBytes("ISO-8859-1"),"UTF-8");
-          String staffDepartment=new String(reguest.getParameter("staffDepartment").getBytes("IsO-8859-1"),"UTF-8");
-          String staffDate=new String(request.getParameter("staffDate").getBytes("IsO-8859-1"),"UTF-8");
-          String staffDuty=new String(request.getParameter("staffDuty").getBytes("IsO-8859-1"),"UTF-8");
-          String staffWage=new String(request.getParameter("staffWage").getBytes("IsO-8859-1"), "UTF-8");
-          Connection con=null;
-          Statement st=null;
-          try{
-              Class.forName("com.mysql.jdbc.Driver");
-              String url="jdbc:mysql://localhost:3306/eims?useUnicode=true&characterEncoding=qbk";
-              con=DriverManager.getConnection(url,"root","admin");
-              st=con.createstatement();
-              String sql="insert into staff (staffName, staffSex, staffAge, staffEducation, staffDepartmentstaffDate,staffDuty,staffWage)values('"+staffName+"','"+ staffSex+"','"+ staffAge+"','"+ staffEducation+",""+staffDepartment+"',""+staffDate+"','"+staffDuty+"" ""+staffwage+"')";
-              st.executeupdate(sql);
-              response.sendRedirect("http://localhost:8084/EIMs/staffManage/lookstaff.jsp");
-          }
-          catch(Exception e) {
-              e.printstackTrace();
-          }
-           finally {
-              st.close();
-              con.close();
+          String staffName = request.getParameter("staffName");
+          String staffSex = request.getParameter("staffSex");
+          String staffAge = request.getParameter("staffAge");
+          String staffEducation = request.getParameter("staffEducation");
+          String staffDepartment = request.getParameter("staffDepartment");
+          String staffDate = request.getParameter("staffDate");
+          String staffDuty = request.getParameter("staffDuty");
+          String staffWage = request.getParameter("staffWage");
+
+          String sql = "INSERT INTO staff (staffName, staffSex, staffAge, staffEducation, staffDepartment, staffDate, staffDuty, staffWage) VALUES (?, ?, ? ,? ,? ,?,? ,?)";
+
+          try {
+              Connection conn = DBConnectionManager.getConnection();
+              PreparedStatement pstmt = conn.prepareStatement(sql);
+
+              pstmt.setString(1, staffName);
+              pstmt.setString(2, staffSex);
+              pstmt.setString(3, staffAge);
+              pstmt.setString(4, staffEducation);
+              pstmt.setString(5, staffDepartment);
+              pstmt.setString(6, staffDate);
+              pstmt.setString(7, staffDuty);
+              pstmt.setString(8, staffWage);
+
+              int rowsAffected = pstmt.executeUpdate();
+
+              if (rowsAffected > 0) {
+                  response.sendRedirect("lookStaff.jsp");
+              } else {
+                  out.println("Failed to insert product information.");
+              }
+              DBConnectionManager.closeConnection();
+          } catch (SQLIntegrityConstraintViolationException e) {
+              out.println("Failed to insert product information.");
+          } catch (SQLException e) {
+              out.println("Error occurred: " + e.getMessage());
+              e.printStackTrace();  // 在控制台打印异常堆栈信息
           }
       %>
 </body>

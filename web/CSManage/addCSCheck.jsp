@@ -1,6 +1,5 @@
-<%@ page import="java.sql.Connection" %>
-<%@ page import="java.sql.Statement" %>
-<%@ page import="java.sql.DriverManager" %><%--
+<%@ page import="java.sql.*" %>
+<%@ page import="SQL.DBConnectionManager" %><%--
   Created by IntelliJ IDEA.
   User: 86158
   Date: 2024/5/11
@@ -14,27 +13,33 @@
 </head>
 <body>
      <%
-         String clientNamenew= new String(request.getParameter("clientName").getBytes("ISO-8859-1"),"UTF-8");
-         String clientOpinion=new String(request.getParameter("clientOpinion").getBytes("ISO-8859-1"),"UTF-8");
-         String staffName= new String(request.getParameter("staffName").getBytes("ISo-8859-1"),"UTF-8");
-         Connection con=null;
-         Statement st=null;
+         String clientName = request.getParameter("clientName");
+         String clientOpinion = request.getParameter("clientOpinion");
+         String staffName = request.getParameter("staffName");
+         String sql = "INSERT INTO CS (clientName, clientOpinion, staffName ) VALUES (?, ?, ? )";
+
          try {
-             Class.forName("com.mysql.jdbc.Driver");
-             String url ="jdbc:mysql://localhost:3306/eims ?useUnicode=true&characterEncoding=gbk";
-             con = DriverManager.getConnection(url, "root", "admin");
-             st = con.createStatement();
-             String clientName;
-             String sql = "insert into cs (clientName,clientOpinion,staffName) values('" + clientName + "", "\"+clientOpinion+\"\"," "+StaffName+" ')";
-             st.executeUpdate(sql);
-             response.sendRedirect("http://localhost:8084/EIMS/CsManage/lookcs.jsp");
-         }
-catch(Exception e){
-             e.printStackTrace();
-  }
-finally {
-             st.close();
-             con.close();
+             Connection conn = DBConnectionManager.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+
+             pstmt.setString(1, clientName);
+             pstmt.setString(2, clientOpinion);
+             pstmt.setString(3, staffName);
+
+             int rowsAffected = pstmt.executeUpdate();
+
+             if (rowsAffected > 0) {
+                 response.sendRedirect("lookCS.jsp");
+             } else {
+                 out.println("Failed to insert client information.");
+             }
+
+             DBConnectionManager.closeConnection();
+         } catch (SQLIntegrityConstraintViolationException e) {
+             out.println("Failed to insert CS information.");
+         } catch (SQLException e) {
+             out.println("Error occurred: " + e.getMessage());
+             e.printStackTrace();  // 在控制台打印异常堆栈信息
          }
      %>
 </body>

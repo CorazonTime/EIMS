@@ -31,7 +31,7 @@
             out.println("姓名：" + rs.getString("clientName") + ", 电话：" + rs.getString("clientTelephone")+",地址："+rs.getString("clientAddress")+",邮箱："+rs.getString("clientEmail"));
             out.println("<br>");
         }
-     } catch (SQLException e) {
+    } catch (SQLException e) {
     out.println("获取数据时发生错误: " + e.getMessage());
     // 还可以将错误记录到日志文件或控制台
     e.printStackTrace();

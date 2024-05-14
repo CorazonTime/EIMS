@@ -1,6 +1,7 @@
-<%@ page import="java.sql.Connection" %>
-<%@ page import="java.sql.Statement" %>
-<%@ page import="java.sql.DriverManager" %><%--
+<%@ page import="java.sql.*" %>
+<%@ page import="SQL.DBConnectionManager" %>
+<%@ page import="java.time.LocalDate" %>
+<%@ page import="java.text.SimpleDateFormat" %><%--
   Created by IntelliJ IDEA.
   User: 86158
   Date: 2024/5/11
@@ -14,31 +15,41 @@
 </head>
 <body>
      <%
-         String clientNamenew= new String(request.getParameter("clientName").getBytes("ISo-8859-1"),"UTF-8");
-         String contactNamenew= new String(request.getParameter("contactName").getBytes("Iso-8859-1"),"UTF-8");
-         String contactContents= new String(request.getParameter("contactContents").getBytes("ISo-8859-1"),"UTF-8");
-         String contactstart= new String(request.getParameter("contactstart").getBytes("ISo-8859-1"),"UTF-8");
-         String contactEnd= new String(request.getParameter("contactEnd").getBytes("ISO-8859-1"),"UTF-8");
-         String StaffName= new String(request.getParameter("staffName").getBytes("ISO-8859-1"),"UTF-8");
-         Connection con=null;
-         Statement st=null;
+         String clientName = request.getParameter("clientName");
+         String contactName = request.getParameter("contactName");
+         String contactContents = request.getParameter("contactContents");
+         String contactStart = request.getParameter("contactStart");
+         String contactEnd = request.getParameter("contactEnd");
+         String staffName = request.getParameter("staffName");
+
+         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+         String sql = "INSERT INTO contact (clientName, contactName, contactContents, contactStart,contactEnd,staffName) VALUES (?, ?, ? ,? ,? ,?)";
+
          try {
-             Class.forName("com.mysql.jdbc.Driver");
-             String url = "jdbc:mysql://localhost:3306/eims ?useUnicode=true&characterEncoding=qbk";
-             con = DriverManager.getConnection(url, "root", "admin");
-             st = con.createStatement();
-             String clientName;
-             String contactName;
-             String sql = "insert into contact(clientName,contactName,contactContents,contactstart, contactEnd,StaffName)values ('" + clientName + "','" + contactName + "'," + contactContents + "", "+contactStart+"','"+contactEnd+"','"+ StaffName+"')";
-             st.executeUpdate(sql);
-             response.sendRedirect("http://localhost:8084/EIMS/ contactManage/lookContact.jsp");
-         }
-    catch(Exception e) {
-        e.printStackTrace();
-    }
-    finally {
-             st.close();
-             con.close();
+             Connection conn = DBConnectionManager.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+
+             pstmt.setString(1, clientName);
+             pstmt.setString(2, contactName);
+             pstmt.setString(3, contactContents);
+             pstmt.setString(4, contactStart);
+             pstmt.setString(5, contactEnd);
+             pstmt.setString(6, staffName);
+
+             int rowsAffected = pstmt.executeUpdate();
+
+             if (rowsAffected > 0) {
+                 response.sendRedirect("lookContact.jsp");
+             } else {
+                 out.println("Failed to insert client information.");
+             }
+             DBConnectionManager.closeConnection();
+         } catch (SQLIntegrityConstraintViolationException e) {
+             out.println("Failed to insert contact information.");
+         } catch (SQLException e) {
+             out.println("Error occurred: " + e.getMessage());
+             e.printStackTrace();  // 在控制台打印异常堆栈信息
          }
      %>
 </body>

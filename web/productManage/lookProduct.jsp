@@ -3,6 +3,7 @@
 <%@ page import="com.mysql.cj.protocol.Resultset" %>
 <%@ page import="java.sql.DriverManager" %>
 <%@ page import="java.sql.*" %>
+<%@ page import="SQL.DBConnectionManager" %>
 <%--
   Created by IntelliJ IDEA.
   User: 86158
@@ -15,14 +16,14 @@
 <head>
     <title>产品查询</title>
 </head>
-<body bgcolor ="lightgreen">
+<body bgcolor="lightgreen">
 <table align="center" width="500">
     <tr>
         <td>产品查询</td>
         <td>
-            <a href ="http://localhost:8084/EIMS/productManage/addProduct.jsp">产品添加</a>
+            <a href="addProduct.jsp">产品添加</a>
         </td>
-        </tr>
+    </tr>
 </table>
 <br>
 <hr>
@@ -38,26 +39,37 @@
         <td>产品价格</td>
     </tr>
     <%
-            Connection con=null;
-            Statement stmt=null;
-            Resultset rs=null;
-            Class.forName("com.mysql.jdbc.Driver");
-            String url="jdbc:mysql://localhost:3306/eims?useUnicode-true&characterEncodinggbk";
-            con= DriverManager.getConnection(url,"root","admin");
-            stmt=con.createStatement();
-            String sql="select* from product";
-            rs= (Resultset) stmt.executeQuery(sql);
-            while(rs.next()){
-            %>
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try {
+            conn = DBConnectionManager.getConnection();
+            String sql = "SELECT * FROM product";
+            stmt = conn.prepareStatement(sql);
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+    %>
     <tr>
-        <td><%=rs.getString("productName")%></td>
-        <td><%=rs.getString("productModel")%></td>
-        <td><%=rs.getString("productNumber")%></td>
-        <td><%=rs.getString("productPrice")%></td>
-        </tr>
-        <%
+        <td><%=rs.getString("productName")%>
+        </td>
+        <td><%=rs.getString("productModel")%>
+        </td>
+        <td><%=rs.getString("productNumber")%>
+        </td>
+        <td><%=rs.getString("productPrice")%>
+        </td>
+    </tr>
+    <%
+            }
+        } catch (SQLException e) {
+            out.println("获取数据时发生错误: " + e.getMessage());
+            // 还可以将错误记录到日志文件或控制台
+            e.printStackTrace();
+        } finally {
+            DBConnectionManager.closeConnection();
         }
-        %>
+    %>
 </table>
 </body>
 </html>

@@ -1,7 +1,6 @@
-<%@ page import="java.sql.Connection" %>
-<%@ page import="java.sql.Statement" %>
 <%@ page import="com.mysql.cj.protocol.Resultset" %>
-<%@ page import="java.sql.DriverManager" %>
+<%@ page import="SQL.DBConnectionManager" %>
+<%@ page import="java.sql.*" %>
 <%--
   Created by IntelliJ IDEA.
   User: 86158
@@ -19,8 +18,8 @@
     <tr>
         <td>合同查询</td>
         <td>
-        <a href="http://localhost:8084/EIMS/contactManage/addContact.jsp">合同添加</a>
-    </td>
+            <a href="addContact.jsp">合同添加</a>
+        </td>
     </tr>
    </table>
    <br>
@@ -39,16 +38,16 @@
         <td>业务员</td>
     </tr>
     <%
-        Connection con=null;
-        Statement stmt=null;
-        Resultset rs=null;
-        Class.forName("com.mysql.jdbc.Driver");
-        String url="jdbc:mysql://localhost:3306/eims?useUnicode=true&characterEncoding=qbk";
-        con= DriverManager.getConnection(url,"root","admin");
-        stmt=con.createStatement();
-        String sql="select * from contact";
-        rs=stmt.executeQuery(sql);
-        while(rs.next()){
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try {
+            conn = DBConnectionManager.getConnection();
+            String sql = "SELECT * FROM contact";
+            stmt = conn.prepareStatement(sql);
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
     %>
     <tr>
         <td><%=rs.getString("clientName")%></td>
@@ -59,6 +58,13 @@
         <td><%=rs.getString("staffName")%></td>
         </tr>
     <%
+            }
+        } catch (SQLException e) {
+            out.println("获取数据时发生错误: " + e.getMessage());
+            // 还可以将错误记录到日志文件或控制台
+            e.printStackTrace();
+        } finally {
+            DBConnectionManager.closeConnection();
         }
     %>
 </table>
