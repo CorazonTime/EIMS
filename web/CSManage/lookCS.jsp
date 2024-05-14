@@ -1,4 +1,4 @@
-<%--
+<%@ page import="java.sql.DriverManager" %><%--
   Created by IntelliJ IDEA.
   User: 86158
   Date: 2024/5/11
@@ -37,7 +37,7 @@
             ResultSet rs=null;
             Class.forName("com.mysql.jdbc.Driver");
             string url="jdbc:mysql://localhost:3306/eims?useUnicode=true&characterEncoding=gbk";
-            con=DriverManager.getConnection(url,"root","admin");
+            con= DriverManager.getConnection(url,"root","admin");
             stmt=con.createStatement();
             String sql="select * from cs";
             rs=stmt.executeQuery(sql);

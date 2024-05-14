@@ -15,10 +15,10 @@
 </head>
 <body>
    <%
-  String clientName=new String(request.getParameter("clientName").getBytes("Iso-8859-1"),"UTf-8");
-  String clientTelephone=new String(request.getParameter("clientTelephone").getBytes("ISo-8859-1"),"UTF-8");
-  String clientAddress= new String(request.getParameter("clientAddress").getBytes("ISo-8859-1"),"UTf-8");
-  String clientEmail= new String(request.getParameter("clientEmail").getBytes("ISo-8859-1"),"UTF-8");
+  String clientName=new String(request.getParamete("clientName").getBytes("Iso-8859-1"),"UTf-8");
+  String clientTelephone=new String(request.getParamete("clientTelephone").getBytes("ISo-8859-1"),"UTF-8");
+  String clientAddress= new String(request.getParameter("rclientAddress").getBytes("ISo-8859-1"),"UTf-8");
+  String clientEmail= new String(request.getParamete("clientEmail").getBytes("ISo-8859-1"),"UTF-8");
   Connection con=null;
   Statement st=null;
   try{
