@@ -1,4 +1,6 @@
-<%--
+<%@ page import="java.sql.Connection" %>
+<%@ page import="java.sql.Statement" %>
+<%@ page import="java.sql.ResultSet" %><%--
   Created by IntelliJ IDEA.
   User: 86158
   Date: 2024/5/11
