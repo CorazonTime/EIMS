@@ -32,22 +32,15 @@
     try {
         conn = DBConnectionManager.getConnection();
 
-        String sql1 = "SELECT * FROM user WHERE userName=?";
+        String sql1 = "SELECT * FROM user WHERE userName=? AND encryptedPassword = ?";
         stmt = conn.prepareStatement(sql1);
         stmt.setString(1, userName);
+        stmt.setString(2, encryptedPassword);
         rs = stmt.executeQuery();
 
         if (rs.next()) {
-            // 用户名存在，验证密码
-            String storedEncryptedPassword = rs.getString("encryptedPassword");
-
-            if (storedEncryptedPassword.equals(encryptedPassword)) {
                 // 密码匹配，重定向到主页面
                 response.sendRedirect("main/main.jsp");
-            } else {
-                // 密码不匹配，重定向到登录页面
-                response.sendRedirect("login.jsp");
-            }
         } else {
             // 用户名不存在，重定向到登录页面
             response.sendRedirect("login.jsp");
