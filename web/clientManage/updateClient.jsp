@@ -15,7 +15,7 @@
       <table align="center" width="500" >
     <tr>
         <td>
-            <a href="ClientManage.jsp">客户查询</a>
+            <a href="lookClient.jsp">客户查询</a>
         </td>
         <td>
             <a href="addClient.jsp">客户添加</a>

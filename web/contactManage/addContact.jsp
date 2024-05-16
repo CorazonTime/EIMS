@@ -45,7 +45,7 @@
            </tr>
            <tr>
                 <td>合同有效期</td>
-                <td><input type="text" name="contactEnd"/></td>
+                <td><input type="date" name="contactEnd"/></td>
            </tr>
            <tr>
                 <td>业务员</td>
